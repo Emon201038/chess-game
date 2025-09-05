@@ -1,24 +1,25 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import type { GameMode, PieceColor } from "@/types/chess"
-import { RotateCcw, Play, Square, Volume2, VolumeX } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import type { GameMode, PieceColor } from "@/types/chess";
+import { RotateCcw, Play, Square, Volume2, VolumeX } from "lucide-react";
 
 interface GameControlsProps {
-  gameMode: GameMode
-  currentPlayer: PieceColor
-  isGameOver: boolean
-  winner: PieceColor | "draw" | null
-  isInCheck: boolean
-  moveCount: number
-  onUndo: () => void
-  onNewGame: () => void
-  onModeChange: (mode: GameMode) => void
-  onSoundToggle: () => void
-  canUndo: boolean
-  soundEnabled: boolean
+  gameMode: GameMode;
+  currentPlayer: PieceColor;
+  isGameOver: boolean;
+  winner: PieceColor | "draw" | null;
+  isInCheck: boolean;
+  moveCount: number;
+  onUndo: () => void;
+  onNewGame: () => void;
+  onModeChange: (mode: GameMode) => void;
+  onSoundToggle: () => void;
+  canUndo: boolean;
+  soundEnabled: boolean;
+  timeExpired?: boolean;
 }
 
 export function GameControls({
@@ -34,6 +35,7 @@ export function GameControls({
   onSoundToggle,
   canUndo,
   soundEnabled,
+  timeExpired,
 }: GameControlsProps) {
   return (
     <Card className="w-full sm:w-80">
@@ -70,17 +72,27 @@ export function GameControls({
           <div className="text-sm font-medium">Game Status</div>
           <div className="flex flex-col gap-2">
             {!isGameOver && (
-              <Badge variant={currentPlayer === "white" ? "default" : "secondary"}>
+              <Badge
+                variant={currentPlayer === "white" ? "default" : "secondary"}
+              >
                 {currentPlayer === "white" ? "White" : "Black"} to move
               </Badge>
             )}
-            {isInCheck && !isGameOver && <Badge variant="destructive">Check!</Badge>}
-            {isGameOver && <Badge variant="outline">{winner === "draw" ? "Draw" : `${winner} wins!`}</Badge>}
+            {isInCheck && !isGameOver && (
+              <Badge variant="destructive">Check!</Badge>
+            )}
+            {isGameOver && (
+              <Badge variant="outline">
+                {winner === "draw" ? "Draw" : `${winner} wins!`}
+              </Badge>
+            )}
           </div>
         </div>
 
         <div className="space-y-2">
-          <div className="text-sm font-medium">Moves: {Math.floor(moveCount / 2) + 1}</div>
+          <div className="text-sm font-medium">
+            Moves: {Math.floor(moveCount / 2) + 1}
+          </div>
         </div>
 
         <div className="flex gap-2">
@@ -111,10 +123,14 @@ export function GameControls({
           onClick={onSoundToggle}
           className="flex items-center gap-2 w-full bg-transparent"
         >
-          {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+          {soundEnabled ? (
+            <Volume2 className="w-4 h-4" />
+          ) : (
+            <VolumeX className="w-4 h-4" />
+          )}
           Sound {soundEnabled ? "On" : "Off"}
         </Button>
       </CardContent>
     </Card>
-  )
+  );
 }
