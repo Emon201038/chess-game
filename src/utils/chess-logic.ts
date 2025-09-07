@@ -294,6 +294,7 @@ function getCastlingMoves(
   color: PieceColor,
   moveHistory: Move[]
 ): Position[] {
+  // console.log(moveHistory);
   const moves: Position[] = [];
   const king = getPieceAt(board, from);
 

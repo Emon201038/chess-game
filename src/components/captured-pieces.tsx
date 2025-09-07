@@ -10,10 +10,7 @@ interface CapturedPiecesProps {
   playerColor?: PieceColor;
 }
 
-export function CapturedPieces({
-  moves,
-  playerColor = "white",
-}: CapturedPiecesProps) {
+export function CapturedPieces({ moves }: CapturedPiecesProps) {
   const capturedByWhite = moves
     .filter((move) => move.piece.color === "white" && move.capturedPiece)
     .map((move) => move.capturedPiece!);

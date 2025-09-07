@@ -35,7 +35,6 @@ export function GameControls({
   onSoundToggle,
   canUndo,
   soundEnabled,
-  timeExpired,
 }: GameControlsProps) {
   return (
     <Card className="w-full sm:w-80">

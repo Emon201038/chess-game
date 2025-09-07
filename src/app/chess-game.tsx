@@ -3,8 +3,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { ChessBoard } from "@/components/chess-board";
-import { GameControls } from "@/components/game-controls";
-import { CapturedPieces } from "@/components/captured-pieces";
 import { MoveHistory } from "@/components/move-history";
 import { GameTimer } from "@/components/game-timer";
 import { GameModeSelection } from "@/components/game-mode-selection";
@@ -30,7 +28,6 @@ import { getBotMove } from "@/utils/chess-ai";
 import { ChessAudio } from "@/utils/sounds";
 import { determineWinnerByMaterial } from "@/utils/game-scoring";
 import { ChessPieceComponent } from "@/components/chess-piece";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ResultCard from "@/components/result-card";
 import { PromotionDialog } from "@/components/promotion-dialog";
@@ -426,19 +423,19 @@ export default function ChessGame() {
     setGameState(initialGameState);
   }, []);
 
-  const handleModeChange = useCallback((mode: GameMode) => {
-    setGameState({
-      ...initialGameState,
-      phase: "playing",
-      gameMode: mode,
-      gameStartTime: Date.now(),
-    });
-  }, []);
+  // const handleModeChange = useCallback((mode: GameMode) => {
+  //   setGameState({
+  //     ...initialGameState,
+  //     phase: "playing",
+  //     gameMode: mode,
+  //     gameStartTime: Date.now(),
+  //   });
+  // }, []);
 
-  const handleSoundToggle = useCallback(() => {
-    const newSoundState = audio.toggleSound();
-    setSoundEnabled(newSoundState);
-  }, [audio]);
+  // const handleSoundToggle = useCallback(() => {
+  //   const newSoundState = audio.toggleSound();
+  //   setSoundEnabled(newSoundState);
+  // }, [audio]);
 
   // Show game mode selection screen
   if (gameState.phase === "selection") {
